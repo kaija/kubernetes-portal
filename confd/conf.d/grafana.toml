@@ -1,0 +1,3 @@
+[template]
+src = "grafana.conf.tmpl"
+dest = "/etc/nginx/conf.d/grafana.conf"

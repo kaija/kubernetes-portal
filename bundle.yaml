@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubernetes-portal
+  labels:
+    app: kubernetes-portal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubernetes-portal
+  template:
+    metadata:
+      labels:
+        app: kubernetes-portal
+    spec:
+      containers:
+      - name: k8s-portal
+        image: kaija/k8s-portal:v3
+        ports:
+        - containerPort: 80
+        env:
+        - name: FQDN
+          value: "hns-stg.trendops.co"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubernetes-portal
+spec:
+  selector:
+    app: kubernetes-portal
+  type: NodePort
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: default
+  name: portal-ingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-1:803667701881:certificate/1bbd9711-3422-4db0-9a9a-c58036d619bb
+    alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-FS-1-2-2019-08
+    alb.ingress.kubernetes.io/security-groups: Trend_Office
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  rules:
+    - host: argocd.hns-stg.trendops.co
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: kubernetes-portal
+              servicePort: http
