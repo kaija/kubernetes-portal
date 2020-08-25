@@ -31,7 +31,6 @@ metadata:
 spec:
   selector:
     app: kubernetes-portal
-  type: NodePort
   ports:
     - name: http
       protocol: TCP
