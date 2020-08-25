@@ -1,6 +1,6 @@
 server {
     listen       80;
-    server_name  argocd.{{getenv "FQDN" }};
+    server_name  prom.{{getenv "FQDN"}};
 
     add_header Strict-Transport-Security max-age=15768000;
 
@@ -36,7 +36,7 @@ server {
         proxy_set_header  X-Real-IP         $remote_addr;
         proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header  X-Forwarded-Proto $scheme;
-        proxy_pass        https://argocd-server.argocd:443/;
+        proxy_pass        http://prometheus-prometheus-oper-prometheus:9090/;
     }
     # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
     #
