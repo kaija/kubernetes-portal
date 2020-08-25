@@ -1,5 +1,5 @@
 img=k8s-portal
-tag=v10
+tag=v11
 
 .PHONY: all build run
 
