@@ -18,6 +18,7 @@ spec:
       containers:
       - name: k8s-portal
         image: kaija/k8s-portal:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         env:
