@@ -3,7 +3,7 @@ tag=setup
 
 .PHONY: all build run
 
-all: build
+all: build push
 
 build:
 	docker build -t kaija/${img}:${tag} .

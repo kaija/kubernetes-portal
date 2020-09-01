@@ -1,3 +1,4 @@
+{{ if eq (getenv "ENABLE_GRAFANA") "true"}}
 server {
     listen       80;
     server_name  grafana.{{getenv "FQDN"}};
@@ -55,3 +56,4 @@ server {
     #    deny  all;
     #}
 }
+{{end}}
