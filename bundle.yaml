@@ -54,10 +54,9 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
 spec:
   rules:
-    - host: argocd.hns-stg.trendops.co
-      http:
+    - http:
         paths:
-          - path: /
+          - path: /*
             backend:
-              serviceName: kubernetes-portal
+              serviceName: argocd-server
               servicePort: http
