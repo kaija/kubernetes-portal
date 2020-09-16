@@ -52,6 +52,7 @@ metadata:
     alb.ingress.kubernetes.io/security-groups: Trend_Office
     alb.ingress.kubernetes.io/backend-protocol: HTTP
     alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /healthz
 spec:
   rules:
     - http:

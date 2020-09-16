@@ -12,6 +12,10 @@ server {
     #charset koi8-r;
     #access_log  /var/log/nginx/host.access.log  main;
 
+    location /healthz {
+        return 200 'OK';
+    }
+
     location / {
         root   /usr/share/nginx/html;
         index  index.html index.htm;
