@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: k8s-portal
-        image: kaija/k8s-portal:setup
+        image: kaija/k8s-portal:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
