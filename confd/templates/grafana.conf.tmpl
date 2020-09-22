@@ -37,7 +37,7 @@ server {
         proxy_set_header  X-Real-IP         $remote_addr;
         proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
         proxy_set_header  X-Forwarded-Proto $scheme;
-        proxy_pass        http://prometheus-grafana:80/;
+        proxy_pass        http://{{getenv "PROMETHEUS_GRAFANA_SERVICE_HOST" "prometheus-grafana"}}:80/;
     }
     # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
     #
